@@ -1,0 +1,23 @@
+{
+  "name": "tasks-api",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "CRUD tasks API with no external libraries",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandosantoshs/tasks-api.git"
+  },
+  "author": "Fernando Santos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fernandosantoshs/tasks-api/issues"
+  },
+  "homepage": "https://github.com/fernandosantoshs/tasks-api#readme",
+  "dependencies": {
+    "@types/node": "^20.14.2"
+  }
+}
