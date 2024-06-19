@@ -67,18 +67,9 @@ export const routes = [
     path: buildRoutePath('/tasks/:id'),
     method: 'DELETE',
     handler: (req, res) => {
-      console.log('Entrou no DELTE handler!');
       const { id } = req.params;
 
-      const indexOfId = database.findIndex((task) => {
-        return task.id == id;
-      });
-      console.log(indexOfId);
-
-      if (indexOfId > -1) {
-        database.splice(indexOfId, 1);
-        console.log('DESTRUIDO!');
-      }
+      database.delete('tasks', id);
 
       return res.writeHead(200).end();
     },
