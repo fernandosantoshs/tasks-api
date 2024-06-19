@@ -9,8 +9,12 @@ export const routes = [
     path: buildRoutePath('/tasks'),
     method: 'GET',
     handler: (req, res) => {
-      const tasks = database.select('tasks');
+      const { search } = req.query;
 
+      const tasks = database.select(
+        'tasks',
+        search ? { title: search, description: search } : null
+      );
       return res.writeHead(200).end(JSON.stringify(tasks));
     },
   },
@@ -38,7 +42,6 @@ export const routes = [
     path: buildRoutePath('/tasks/:id'),
     method: 'PUT',
     handler: (req, res) => {
-      console.log('Entrou no PUT handler!');
       const { id } = req.params;
       const { title, description } = req.body;
 
@@ -46,9 +49,16 @@ export const routes = [
         return res.writeHead(400).end('Title or description is mandatory!');
       }
 
-      const task = database.select('tasks', id);
+      const [task] = database.select('tasks', { id });
 
       if (!task) return res.writeHead(404).end('Task not found');
+
+      database.update('tasks', id, {
+        ...task,
+        title: title ?? task.title,
+        description: description ?? task.description,
+        updated_at: new Date(),
+      });
 
       return res.writeHead(200).end();
     },

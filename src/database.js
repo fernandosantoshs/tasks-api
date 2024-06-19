@@ -17,8 +17,16 @@ export class Database {
     fs.writeFile(databasePath, JSON.stringify(this.#database));
   }
 
-  select(table) {
-    const data = this.#database[table] ?? [];
+  select(table, search) {
+    let data = this.#database[table] ?? [];
+
+    if (search) {
+      data = data.filter((task) => {
+        return Object.entries(search).some(([key, value]) => {
+          return task[key].toLowerCase().includes(value.toLowerCase());
+        });
+      });
+    }
 
     return data;
   }
@@ -32,7 +40,16 @@ export class Database {
     }
   }
 
-  update() {}
+  update(table, id, data) {
+    const taskIndex = this.#database[table].findIndex((task) => {
+      return task.id == id;
+    });
+
+    if (taskIndex > -1) {
+      this.#database[table][taskIndex] = { ...data };
+      this.#persist();
+    }
+  }
 
   delete() {}
 }
