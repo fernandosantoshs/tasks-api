@@ -6,8 +6,6 @@ import { extractQueryParams } from './utils/extract-query-params.js';
 const server = http.createServer(async (req, res) => {
   const { method, url } = req;
 
-  //console.log(`Method: ${method}, url: ${url}`);
-
   await extractReqBody(req, res);
 
   const route = routes.find((route) => {
