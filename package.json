@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/fernandosantoshs/tasks-api#readme",
   "dependencies": {
-    "@types/node": "^20.14.2"
+    "@types/node": "^20.14.2",
+    "csv-parse": "^5.5.6"
   }
 }
