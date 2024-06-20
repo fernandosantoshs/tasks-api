@@ -1,6 +1,12 @@
 # tasks-api
 
-CRUD tasks API only with node's native libraries
+CRUD tasks API only with node's native libraries (except for csv import)
+
+To run:
+`npm run dev`
+
+Arquivo 'db.json' será criado na raiz para guardar os dados.
+
 Rotas:
 
 - `POST - /tasks`
